@@ -1,26 +1,25 @@
 require 'active_record'
 
+ActiveRecord::Base.establish_connection(
+    :adapter=> "mysql",
+    :host => "localhost",
+   :database=> "todo"
+)
+
 # A class that represents a Todo item
 class TodoItem < ActiveRecord::Base
-  attr_accessor :name
-  attr_accessor :done
-
-  def initialize(name, done = false)
-    @name = name
-    @done = done
-  end
 
 =begin
-  Is the task done?
+  Is thetask done?
 =end
   def done?
-    @done
+    self.done
   end
 
 =begin
   Show the name and state of a todo item
 =end
   def show
-    @done ? "#{@name} is done" : "#{@name} is not done"
+    self.done ? "#{self.name} is done" : "#{self.name} is not done"
   end
 end
