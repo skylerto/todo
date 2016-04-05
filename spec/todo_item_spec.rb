@@ -23,4 +23,10 @@ describe TodoItem do
     expect(TodoItem.new(:name => "This is a new item", :done => true).show).to eq("This is a new item is done")
   end
 
+  it 'should complete a task' do
+    item = TodoItem.new(:name => "finish this")
+    item.complete
+    expect(item.done?).to eq(true)
+  end
+
 end

@@ -16,6 +16,12 @@ class TodoList
   end
 
   ##
+  # Get all +TodoItems+
+  def self.todos
+    @todos
+  end
+
+  ##
   # Show all the done
   def self.show_done
     @todos.find_by(:done => true)
@@ -27,6 +33,14 @@ class TodoList
     todo = TodoItem.new(:name => name, :done => done)
     todo.save if todo
     @todos = TodoItem.all
+    todo
+  end
+
+  def self.remove(id)
+    todo = TodoItem.find_by_id(id)
+    todo.delete
+    @todos = TodoItem.all
+    todo
   end
 
   ##
@@ -35,6 +49,17 @@ class TodoList
     @todos.each do |item|
       puts "id: #{item.id}, Name: #{item.name}, Done: #{item.done}"
     end
+  end
+
+  ##
+  # Complete the +TodoItem+
+  def self.complete(id)
+    item = TodoItem.find_by_id(id)
+    if item
+      item.complete
+      item.save
+    end
+    item
   end
 
 end

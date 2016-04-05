@@ -6,20 +6,25 @@ ActiveRecord::Base.establish_connection(
    :database=> "todo"
 )
 
+##
 # A class that represents a Todo item
 class TodoItem < ActiveRecord::Base
 
-=begin
-  Is thetask done?
-=end
+  ##
+  # Is the task done?
   def done?
     self.done
   end
 
-=begin
-  Show the name and state of a todo item
-=end
+  ##
+  # Show the name and state of a +TodoItem+
   def show
     self.done ? "#{self.name} is done" : "#{self.name} is not done"
+  end
+
+  ##
+  # Complete a task
+  def complete
+    self.done = true
   end
 end
